@@ -1,10 +1,32 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface LoaderProps {
   text: string;
+  loading: boolean;
 }
 
-export default function Loader({ text }: LoaderProps) {
+export default function Loader({ text, loading }: LoaderProps) {
+  const [slowLoading, setSlowLoading] = useState(false);
+
+  /**
+   * Add message if loading takes too long (> 3s)
+   */
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (loading) {
+      setSlowLoading(false);
+      timer = setTimeout(() => {
+        setSlowLoading(true);
+      }, 3000);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [loading]);
+
   return (
     <div className="flex flex-col items-center pt-8 gap-8">
       <span className="flex flex-col gap-2 items-center">
@@ -25,8 +47,19 @@ export default function Loader({ text }: LoaderProps) {
           />
         </svg>
         {text && <span>{text}</span>}
+        {slowLoading && (
+          <span className="text-xs w-[200px] text-center">
+            Le chargement peut prendre un peu de temps si le serveur s&apos;est
+            endormi...
+          </span>
+        )}
       </span>
-      <Image src="/images/loading.webp" alt="chargement" width={700} height={700} />
+      <Image
+        src="/images/loading.webp"
+        alt="chargement"
+        width={700}
+        height={700}
+      />
     </div>
   );
 }

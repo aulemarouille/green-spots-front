@@ -17,7 +17,7 @@ export default function HomePage() {
         accentWord={error ? undefined : "durable"}
       >
         {error && <PageError message={error} />}
-        {loading && <Loader text="Récupération des spots" />}
+        {loading && <Loader loading={loading} text="Récupération des spots" />}
 
         {!loading && !error && (
           <>
