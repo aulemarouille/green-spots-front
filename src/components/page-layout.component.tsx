@@ -15,9 +15,9 @@ export default function PageLayout({
     <>
       <Navbar />
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center my-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-center my-4 md:my-8 mx-2">
           {title}
-          <span className="caveat text-5xl"> {accentWord}</span>
+          <span className="caveat text-4xl md:text-5xl"> {accentWord}</span>
         </h1>
         {children}
       </div>

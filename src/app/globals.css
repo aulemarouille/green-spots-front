@@ -39,21 +39,9 @@ span.caveat {
   font-style: normal;
 }
 
-/* Fix pour Leaflet
-.leaflet-container {
-  height: 100% !important;
-  width: 100% !important;
-  z-index: 1 !important;
+@media (max-width: 768px) {
+  .leaflet-popup-content {
+    max-height: 49vh; 
+    overflow-y: auto;
+  }
 }
-
-.leaflet-tile {
-  max-width: none !important;
-}
-
-.leaflet-map-pane {
-  z-index: 1 !important;
-}
-
-.leaflet-container .leaflet-control-zoom {
-  z-index: 1000 !important;
-} */

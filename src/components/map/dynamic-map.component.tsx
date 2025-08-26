@@ -17,9 +17,14 @@ interface DynamicMapProps {
 }
 
 export default function DynamicMap({ spots, selectedType }: DynamicMapProps) {
+  const SCREEN_MD = 768;
+
   const [mounted, setMounted] = useState(false);
   const mapRef = useRef<L.Map>(null);
   const markerRefs = useRef<L.Marker[]>([]);
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth < SCREEN_MD;
+  const zoom = isMobile ? 7 : 8; // smaller zoom on mobile
 
   // Create custom icons for different spot types
   const createCustomIcon = (type: SpotType) => {
@@ -90,7 +95,7 @@ export default function DynamicMap({ spots, selectedType }: DynamicMapProps) {
         <MapContainer
           key={selectedType}
           center={[48.202, -2.9326]} // Center of Bretagne
-          zoom={8}
+          zoom={zoom}
           className="w-full h-full"
           ref={mapRef}
         >
