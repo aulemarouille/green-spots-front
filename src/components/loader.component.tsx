@@ -26,7 +26,7 @@ export default function Loader({ text }: LoaderProps) {
         </svg>
         {text && <span>{text}</span>}
       </span>
-      <Image src="/images/loading.webp" alt="alt" width={600} height={600} />
+      <Image src="/images/loading.webp" alt="chargement" width={700} height={700} />
     </div>
   );
 }

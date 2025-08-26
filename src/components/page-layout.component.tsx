@@ -2,7 +2,7 @@ import { Navbar } from "./navbar.component";
 
 interface PageLayoutProps {
   title: string;
-  accentWord: string;
+  accentWord?: string;
   children: React.ReactNode;
 }
 

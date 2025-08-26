@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { SpotsResponse, TypesResponse } from "@/types/spots";
 
 const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/spots/`;
@@ -21,15 +21,22 @@ export const searchSpots = async (query: string): Promise<SpotsResponse> => {
     .then((response) => response.data);
 };
 
-export const handleApiError = (error: any): string => {
+export const handleApiError = (error: unknown): string => {
   if (axios.isAxiosError(error)) {
     if (error.response) {
-      return `API Error: ${error.response.status} - ${
-        error.response.data?.message || "Unknown error"
-      }`;
+      const message =
+        error.response.data && error.response.data.message
+          ? String(error.response.data.message)
+          : "Unknown error";
+      return `API Error: ${error.response.status} - ${message}`;
     } else if (error.request) {
-      return "Network Error: Unable to reach the server. Make sure Django is running on localhost:8000";
+      return "Network Error: Unable to reach the server.";
     }
   }
-  return "Unexpected error occurred";
+
+  if (error instanceof Error) {
+    return `Unexpected error: ${error.message}`;
+  }
+
+  return "An unknown error occurred.";
 };
