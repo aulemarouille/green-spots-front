@@ -17,19 +17,12 @@ export interface Spot {
 export const spotTypes = [
   'organic_market',
   'eco_accommodation',
-  'charging_station',
   'local_producer',
+  'charging_station',
   'bio_shop',
 ] as const;
 
 export type SpotType = typeof spotTypes[number] | 'all';
-
-//export type SpotType =
-//  | "organic_market"
-//  | "eco_accommodation"
-//  | "charging_station"
-//  | "local_producer"
-//  | "bio_shop";
 
 export interface SpotsResponse {
   spots: Spot[];

@@ -88,6 +88,7 @@ export default function DynamicMap({ spots, selectedType }: DynamicMapProps) {
       <div className="w-full h-[55vh] rounded-lg overflow-hidden shadow-lg">
         {/* Map */}
         <MapContainer
+          key={selectedType}
           center={[48.202, -2.9326]} // Center of Bretagne
           zoom={8}
           className="w-full h-full"
